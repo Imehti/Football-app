@@ -46,14 +46,15 @@ const SearchLeague: React.FC = () => {
 
   return (
     <>
-      <div className="">
+      <div className="m-8 flex items-center">
+        <p className="mx-2">Other Leagues Standing:</p>
         <AutoComplete
-          className="w-1/2"
+          className="w-1/3"
           value={value}
           options={options}
           onSelect={onSelect}
           onChange={onChange}
-          placeholder="input here"
+          placeholder="Search League..."
         />
       </div>
     </>
