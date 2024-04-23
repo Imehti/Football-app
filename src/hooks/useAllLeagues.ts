@@ -8,6 +8,8 @@ export interface AllLeagues {
 export interface League {
   idLeague: string;
   strLeague: string;
+  lable:string,
+  value:string
 }
 
 const useAllLeagues= () =>

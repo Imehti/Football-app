@@ -1,16 +1,23 @@
-import { startTransition } from "react";
+
 import { AutoComplete } from "antd";
 import SearchLeagueState from "../recoil/atom/SearchLeagueState";
-import useAllLeagues, { AllLeagues, League } from "../hooks/useAllLeagues";
-import { useRecoilState } from "recoil";
-import { useState } from 'react'
+import useAllLeagues, { League } from "../hooks/useAllLeagues";
+import { useRecoilState , useRecoilValue } from "recoil";
+
 import SearchLeagueOptions from "../recoil/atom/SearchLeagueOptions";
+import searchedLeagueValue from "../recoil/selector/SearchedLeagueValue";
 
 
 
 const SearchLeague: React.FC = () => {
   const { data: allLeagues } = useAllLeagues();
   const [value, setValue] = useRecoilState(SearchLeagueState);
+  const searchedValue=useRecoilValue(searchedLeagueValue)
+
+  console.log(searchedValue[0].value);
+  
+  
+  
   const [options, setOptions] =
     useRecoilState<League[]>(SearchLeagueOptions);
 

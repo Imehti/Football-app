@@ -1,6 +1,8 @@
 
 import {atom} from 'recoil'
-import { AllLeagues, League } from '../../hooks/useAllLeagues'
+import {  League } from '../../hooks/useAllLeagues'
+
+
 
 const SearchLeagueOptions =atom<League[]>({
     key:'searchLeagueOptions',
