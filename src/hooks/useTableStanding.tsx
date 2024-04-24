@@ -2,16 +2,21 @@ import type { TableProps } from "antd";
 import { useRecoilValue } from "recoil";
 import useSearchLeague from "./useSearchLeague";
 import searchedLeagueValue from "../recoil/selector/SearchedLeagueValue";
+import FilterdYearValue from "../recoil/selector/FilterdYearValue";
 
 const useTableStanding = () => {
   const searchedValue = useRecoilValue(searchedLeagueValue);
+  const yearValue= useRecoilValue(FilterdYearValue)
+  
+  
   const {
     data: league,
     isError,
     error,
-  } = useSearchLeague(Number(searchedValue[0]?.idLeague));
+  } = useSearchLeague(Number(searchedValue[0]?.idLeague),(yearValue[0]?.value));
 
-  // console.log(searchedValue[0]?.idLeague);
+ console.log( (yearValue[0]?.value));
+ 
 
   const columns: TableProps["columns"] = [
     {

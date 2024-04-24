@@ -1,9 +1,10 @@
 import { atom } from "recoil";
+import { YearType } from "../../components/FilterYear";
 
 
-const FilterYearState=atom({
+const FilterYearState=atom<YearType[]>({
+    default: [],
     key:'FilterYearState',
-    default:2023-2024
 })
 
 export default FilterYearState

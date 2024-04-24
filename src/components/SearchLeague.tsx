@@ -40,8 +40,8 @@ const SearchLeague: React.FC = () => {
 
   return (
     <>
-      <div className="m-8 flex items-center">
-        <p className="mx-2">Other Leagues Standing:</p>
+      <div className="sm:flex items-center w-full">
+        <p className="mx-2">Other Leagues:</p>
         <AutoComplete
           className="w-1/3"
           value={value}

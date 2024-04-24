@@ -22,16 +22,16 @@ export interface League {
   table: Table[];
 }
 
-const useSearchLeague = (idLeague: number) => {
+const useSearchLeague = (idLeague: number,year:number|string) => {
 
   return useQuery<League>({
-    queryKey: ["filterdLeague",idLeague],
+    queryKey: ["filterdLeague",idLeague,year],
     queryFn: () =>
       apiClient
         .get<League>(
           `/lookuptable.php?l=${
             idLeague && idLeague !== undefined ? idLeague : 4328
-          }&s=2023-2024`
+          }&s=${year && year !== undefined ? year : '2023-2024'}`
         )
         .then((res) => res.data),
   });
