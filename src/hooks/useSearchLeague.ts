@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "../services/api-client";
+// import { useRecoilValue } from "recoil";
+// import isSelectedLeagueaValue from "../recoil/selector/isSelectedLeagueValue";
 
 
 export interface Table {
@@ -23,20 +25,20 @@ export interface League {
 }
 
 const useSearchLeague = (idLeague: number, year: number | string) => {
+// const selectedLeagueStatus =useRecoilValue(isSelectedLeagueaValue)
 
-
-  // console.log(selectedLeagueStatus);
+//  console.log(selectedLeagueStatus);
 
   return useQuery<League>({
     queryKey: ["filterdLeague", idLeague, year],
     enabled:false,
-    refetchOnWindowFocus:true,
+
     queryFn: () =>
       apiClient
         .get<League>(
           `/lookuptable.php?l=${
             idLeague && idLeague !== undefined ? idLeague : 4328
-          }&s=${year && year !== undefined ? year : "2023-2024"}`
+          }&s=${ year && year !== undefined ? year : "2023-2024"}`
         )
         .then((res) => res.data),
   });

@@ -2,6 +2,7 @@ import { AutoComplete } from "antd";
 import React,{ useState } from "react";
 import { useRecoilState } from "recoil";
 import FilterYearState from "../recoil/atom/FilterYearState";
+import isSelectedYearState from "../recoil/atom/isSelectedYearState";
 
 export interface YearType {
   value: number | string;
@@ -11,6 +12,7 @@ export interface YearType {
 const FilterYear: React.FC = () => {
   const [value, setValue] = useState<number | string>();
   const [options, setOptions] = useRecoilState<YearType[]>(FilterYearState);
+  const [isSelected,setIsSelected]=useRecoilState(isSelectedYearState)
   
   const startYear = 2010;
   const endYear = 2023;
@@ -25,10 +27,12 @@ const FilterYear: React.FC = () => {
 
   const onSelect = (data: number | string) => {
     setValue(data);
+    setIsSelected(true)
   };
 
   const onChange = (data: number | string) => {
     setValue(data);
+    setIsSelected(false)
     if (data === '') {
       setOptions(yearOptions);
     } else {
