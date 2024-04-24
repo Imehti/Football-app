@@ -5,26 +5,27 @@ import useAllLeagues, { League } from "../hooks/useAllLeagues";
 import { useRecoilState , useRecoilValue } from "recoil";
 
 import SearchLeagueOptions from "../recoil/atom/SearchLeagueOptions";
-import searchedLeagueValue from "../recoil/selector/SearchedLeagueValue";
+
 
 
 
 const SearchLeague: React.FC = () => {
   const { data: allLeagues } = useAllLeagues();
   const [value, setValue] = useRecoilState(SearchLeagueState);
-  const searchedValue=useRecoilValue(searchedLeagueValue)
 
-  console.log(searchedValue[0].value);
+
+//   console.log(searchedValue[0]?.idLeague);
   
   
   
   const [options, setOptions] =
     useRecoilState<League[]>(SearchLeagueOptions);
 
-  const searchOptions = allLeagues?.leagues.map((league) => league.strLeague);
+  const searchOptions = allLeagues?.leagues.map((league) => league);
 
   const onSelect = (data: string) => {
     setValue(data);
+ 
   };
 
 
@@ -33,13 +34,19 @@ const SearchLeague: React.FC = () => {
   const onChange = (data: string) => {
     setValue(data);
     if (data.length > 0) {
-        const filteredOptions = searchOptions?.filter((option:string) =>
-          option.toLowerCase().includes(data.toLowerCase())
+        const filteredOptions = searchOptions?.filter((option:any) =>
+          option.strLeague.toLowerCase().includes(data.toLowerCase())
         );
-        const optionsObjects:any= filteredOptions?.map((option:string) => ({
-            label: option,
-            value: option,
+     
+        
+        const optionsObjects:any= filteredOptions?.map((option:any) => ({
+            label: option.strLeague,
+            value: option.strLeague,
+            idLeague:option.idLeague
           }));
+       
+          
+          
        
         
         setOptions(optionsObjects);
