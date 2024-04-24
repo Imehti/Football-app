@@ -1,24 +1,15 @@
-
+import { Table } from "antd";
 import SearchLeague from "./components/SearchLeague";
-import TableStanding from "./components/TableStanding";
-
-
-
-
-
+import useTableStanding from "./hooks/useTableStanding";
 
 function App() {
-
-
- 
-
+  const { columns, data } = useTableStanding();
   return (
     <>
-    <div>
-    <SearchLeague />
-    </div>
-    <TableStanding />
-   
+      <div>
+        <SearchLeague />
+      </div>
+      <Table columns={columns} dataSource={data} />
     </>
   );
 }

@@ -3,11 +3,13 @@ import { useRecoilValue } from "recoil";
 import useSearchLeague from "./useSearchLeague";
 import searchedLeagueValue from "../recoil/selector/SearchedLeagueValue";
 
-
 const useTableStanding = () => {
   const searchedValue = useRecoilValue(searchedLeagueValue);
-  const { data: league } = useSearchLeague(Number(searchedValue[0]?.idLeague));
-
+  const {
+    data: league,
+    isError,
+    error,
+  } = useSearchLeague(Number(searchedValue[0]?.idLeague));
 
   // console.log(searchedValue[0]?.idLeague);
 
@@ -72,20 +74,22 @@ const useTableStanding = () => {
   ];
 
   const data =
-    league?.table?.map((team) => ({
-      key: team.idTeam,
-      strTeam: team.strTeam,
-      intPlayed: team.intPlayed,
-      intWin: team.intWin,
-      intDraw: team.intDraw,
-      intLoss: team.intLoss,
-      intGoalsFor: team.intGoalsFor,
-      intGoalsAgainst: team.intGoalsAgainst,
-      intGoalDifference: team.intGoalDifference,
-      intPoints: team.intPoints,
-      strTeamBadge: team.strTeamBadge,
-      intRank: team.intRank,
-    })) || [];
+    (!isError &&
+      league?.table?.map((team) => ({
+        key: team.idTeam,
+        strTeam: team.strTeam,
+        intPlayed: team.intPlayed,
+        intWin: team.intWin,
+        intDraw: team.intDraw,
+        intLoss: team.intLoss,
+        intGoalsFor: team.intGoalsFor,
+        intGoalsAgainst: team.intGoalsAgainst,
+        intGoalDifference: team.intGoalDifference,
+        intPoints: team.intPoints,
+        strTeamBadge: team.strTeamBadge,
+        intRank: team.intRank,
+      }))) ||
+    [];
 
   return { columns, data };
 };
