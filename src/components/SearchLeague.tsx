@@ -4,12 +4,15 @@ import useAllLeagues, { League } from "../hooks/useAllLeagues";
 import { useRecoilState } from "recoil";
 
 import SearchLeagueOptions from "../recoil/atom/SearchLeagueOptions";
+import isSelectedLeagueaState from "../recoil/atom/isSelectedLeagueState";
+
 
 const SearchLeague: React.FC = () => {
   const { data: allLeagues } = useAllLeagues();
   const [value, setValue] = useRecoilState(SearchLeagueState);
+  const [isSelected,setIsSelected]=useRecoilState(isSelectedLeagueaState)
 
-  //   console.log(searchedValue[0]?.idLeague);
+ 
 
   const [options, setOptions] = useRecoilState<League[]>(SearchLeagueOptions);
 
@@ -17,10 +20,12 @@ const SearchLeague: React.FC = () => {
 
   const onSelect = (data: string) => {
     setValue(data);
+    setIsSelected(true)
   };
 
   const onChange = (data: string) => {
     setValue(data);
+    setIsSelected(false)
     if (data.length > 0) {
       const filteredOptions = searchOptions?.filter((option: any) =>
         option.strLeague.toLowerCase().includes(data.toLowerCase())

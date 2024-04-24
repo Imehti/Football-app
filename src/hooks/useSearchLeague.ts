@@ -22,20 +22,24 @@ export interface League {
   table: Table[];
 }
 
-const useSearchLeague = (idLeague: number,year:number|string) => {
+const useSearchLeague = (idLeague: number, year: number | string) => {
+
+
+  // console.log(selectedLeagueStatus);
 
   return useQuery<League>({
-    queryKey: ["filterdLeague",idLeague,year],
+    queryKey: ["filterdLeague", idLeague, year],
+    enabled:false,
+    refetchOnWindowFocus:true,
     queryFn: () =>
       apiClient
         .get<League>(
           `/lookuptable.php?l=${
             idLeague && idLeague !== undefined ? idLeague : 4328
-          }&s=${year && year !== undefined ? year : '2023-2024'}`
+          }&s=${year && year !== undefined ? year : "2023-2024"}`
         )
         .then((res) => res.data),
   });
-
 };
 
 export default useSearchLeague;

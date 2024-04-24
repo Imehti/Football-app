@@ -3,21 +3,26 @@ import { useRecoilValue } from "recoil";
 import useSearchLeague from "./useSearchLeague";
 import searchedLeagueValue from "../recoil/selector/SearchedLeagueValue";
 import FilterdYearValue from "../recoil/selector/FilterdYearValue";
+import isSelectedLeagueaValue from "../recoil/selector/isSelectedLeagueValue";
+import { useEffect } from "react";
 
 const useTableStanding = () => {
   const searchedValue = useRecoilValue(searchedLeagueValue);
-  const yearValue= useRecoilValue(FilterdYearValue)
-  
-  
+  const yearValue = useRecoilValue(FilterdYearValue);
+  const selectedLeagueStatus=useRecoilValue(isSelectedLeagueaValue)
+ 
   const {
     data: league,
     isError,
+    refetch,
     error,
-  } = useSearchLeague(Number(searchedValue[0]?.idLeague),(yearValue[0]?.value));
+  } = useSearchLeague(Number(searchedValue[0]?.idLeague), yearValue[0]?.value);
 
- 
- 
-
+  useEffect(() => {
+    if (selectedLeagueStatus) {
+      refetch();
+    }
+  }, [selectedLeagueStatus, refetch]);
   const columns: TableProps["columns"] = [
     {
       title: "Team",
@@ -96,7 +101,9 @@ const useTableStanding = () => {
       }))) ||
     [];
 
+  
   return { columns, data };
+
 };
 
 export default useTableStanding;
