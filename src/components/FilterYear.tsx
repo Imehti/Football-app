@@ -46,7 +46,7 @@ const FilterYear: React.FC = () => {
   return (
     <>
       <div className="sm:flex items-center w-full">
-        <p className="mx-2">Year:</p>
+        <p className="mx-2">Season:</p>
         <AutoComplete
           className="w-1/3"
           value={value}

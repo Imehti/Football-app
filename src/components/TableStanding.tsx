@@ -16,16 +16,19 @@ const useTableStanding = () => {
     data: league,
     isError,
     refetch,
-    error,
   } = useSearchLeague(Number(searchedValue[0]?.idLeague), yearValue[0]?.value);
 
   console.log(league);
-
   if (selectedLeagueStatus || selectedYearStatus) {
     refetch();
   }
 
   const leagueName = league?.table[0].strLeague;
+
+  const leagueSize: any = league?.table.length;
+
+  const secondLeagueOfCountry= league?.table[0].strLeague.includes("2") ||
+  league?.table[0].strLeague.includes("B") || league?.table[0].strLeague=='English League Championship'
 
   const columns: TableProps["columns"] = [
     {
@@ -35,11 +38,28 @@ const useTableStanding = () => {
       render: (teamName: string, record: any) => (
         <div
           className={`flex items-center ${
-            record.intRank >= 1 &&
-            record.intRank <= 4 &&
-            "border-l-2 border-green-500"
-          } ${record.intRank == 5 && "border-l-2 border-orange-400"}
-          ${record.intRank >= 18 && "border-l-2 border-red-600"}`}
+            !secondLeagueOfCountry &&
+              record.intRank >= 1 &&
+              record.intRank <= 4 &&
+              "border-l-2 border-green-500" ||
+              secondLeagueOfCountry &&
+              record.intRank >= 1 &&
+              record.intRank <= 2 &&
+              "border-l-2 border-green-500"
+          } ${
+            !secondLeagueOfCountry  &&
+            record.intRank == 5 &&
+            "border-l-2 border-orange-400" ||
+            secondLeagueOfCountry  &&
+            record.intRank >= 3 &&
+            record.intRank <= 5 &&
+            "border-l-2 border-orange-400"
+          }
+          ${
+            record.intRank <= leagueSize &&
+            record.intRank >= leagueSize - 2 &&
+            "border-l-2 border-red-600"
+          }`}
         >
           <span className="ml-2">{record.intRank} .</span>
           <img
@@ -97,7 +117,7 @@ const useTableStanding = () => {
       title: "Form",
       dataIndex: "strForm",
       key: "strForm",
-      render: (form: string, record: any) => <CircleForm form={form} />,
+      render: (form: string) => <CircleForm form={form} />,
     },
   ];
 
