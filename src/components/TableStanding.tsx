@@ -1,20 +1,17 @@
 import type { TableProps } from "antd";
 import { useRecoilValue } from "recoil";
-import useSearchLeague from "./useSearchLeague";
+import useSearchLeague from "../hooks/useSearchLeague";
 import searchedLeagueValue from "../recoil/selector/SearchedLeagueValue";
 import FilterdYearValue from "../recoil/selector/FilterdYearValue";
 import isSelectedLeagueaValue from "../recoil/selector/isSelectedLeagueValue";
-import { useEffect } from "react";
 import isSelectedYearValue from "../recoil/selector/isSelectedYearValue";
 
 const useTableStanding = () => {
   const searchedValue = useRecoilValue(searchedLeagueValue);
   const yearValue = useRecoilValue(FilterdYearValue);
-  const selectedLeagueStatus=useRecoilValue(isSelectedLeagueaValue)
-   const selectedYearStatus=useRecoilValue(isSelectedYearValue)
+  const selectedLeagueStatus = useRecoilValue(isSelectedLeagueaValue);
+  const selectedYearStatus = useRecoilValue(isSelectedYearValue);
 
-   
- 
   const {
     data: league,
     isError,
@@ -22,19 +19,29 @@ const useTableStanding = () => {
     error,
   } = useSearchLeague(Number(searchedValue[0]?.idLeague), yearValue[0]?.value);
 
- 
-    if (selectedLeagueStatus || selectedYearStatus) {
-      refetch();
-    }
- 
+  console.log(league);
+
+  if (selectedLeagueStatus || selectedYearStatus) {
+    refetch();
+  }
+
+  const leagueName = league?.table[0].strLeague;
+
   const columns: TableProps["columns"] = [
     {
       title: "Team",
       dataIndex: "strTeam",
       key: "strTeam",
       render: (teamName: string, record: any) => (
-        <div className="flex items-center">
-          <span>{record.intRank} .</span>
+        <div
+          className={`flex items-center ${
+            record.intRank >= 1 &&
+            record.intRank <= 4 &&
+            "border-l-2 border-green-500"
+          } ${record.intRank == 5 && "border-l-2 border-orange-400"}
+          ${record.intRank >= 18 && "border-l-2 border-red-600"}`}
+        >
+          <span className="ml-2">{record.intRank} .</span>
           <img
             className="ml-1"
             src={record.strTeamBadge}
@@ -45,6 +52,7 @@ const useTableStanding = () => {
         </div>
       ),
     },
+
     {
       title: "GP",
       dataIndex: "intPlayed",
@@ -85,7 +93,48 @@ const useTableStanding = () => {
       dataIndex: "intPoints",
       key: "intPoints",
     },
+    {
+      title: "Form",
+      dataIndex: "strForm",
+      key: "strForm",
+      render: (form: string, record: any) => <CircleForm form={form} />,
+    },
   ];
+
+  const CircleForm = ({ form }: { form: string }) => {
+    const formArray = form.split("");
+    const circleSize = 24;
+
+    return (
+      <>
+        <div className="flex flex-row justify-center items-center mr-12">
+          {formArray.map((char) => (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: circleSize,
+                height: circleSize,
+                borderRadius: "50%",
+                border: "1px solid #ddd",
+                overflow: "hidden",
+              }}
+            >
+              <span
+                className={`w-full p-1 text-white ${
+                  char == "W" && "bg-green-600"
+                } ${char == "L" && "bg-red-700 p-2"}
+                ${char == "D" && "bg-gray-400 p-1.5"}`}
+              >
+                {char}
+              </span>
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  };
 
   const data =
     (!isError &&
@@ -102,12 +151,11 @@ const useTableStanding = () => {
         intPoints: team.intPoints,
         strTeamBadge: team.strTeamBadge,
         intRank: team.intRank,
+        strForm: team.strForm,
       }))) ||
     [];
 
-  
-  return { columns, data };
-
+  return { columns, data, leagueName };
 };
 
 export default useTableStanding;

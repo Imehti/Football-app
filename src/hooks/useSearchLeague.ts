@@ -5,6 +5,8 @@ import apiClient from "../services/api-client";
 
 
 export interface Table {
+  strForm:string,
+  strLeague:string
   intRank: number;
   key: string;
   strTeam: string;
