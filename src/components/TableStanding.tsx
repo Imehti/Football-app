@@ -16,6 +16,7 @@ const useTableStanding = () => {
     data: league,
     isError,
     refetch,
+    isLoading,
   } = useSearchLeague(Number(searchedValue[0]?.idLeague), yearValue[0]?.value);
 
   console.log(league);
@@ -175,7 +176,7 @@ const useTableStanding = () => {
       }))) ||
     [];
 
-  return { columns, data, leagueName };
+  return { columns, data, leagueName, isLoading };
 };
 
 export default useTableStanding;
