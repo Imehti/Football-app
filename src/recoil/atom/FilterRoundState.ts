@@ -3,8 +3,8 @@ import { Round } from "../../components/FilterRound";
 
 
 const FilterRoundState=atom<Round[]>({
-    default: [],
     key:'FilterRoundState',
+    default: [],
 })
 
 export default FilterRoundState
