@@ -3,25 +3,35 @@ import useNextMatches from "../hooks/useNextMatches";
 import searchedLeagueValue from "../recoil/selector/SearchedLeagueValue";
 import useTableStanding from "./TableStanding";
 import isSelectedLeagueaValue from "../recoil/selector/isSelectedLeagueValue";
+import FilterdYearValue from "../recoil/selector/FilterdYearValue";
+import isSelectedYearValue from "../recoil/selector/isSelectedYearValue";
 
 function NextMatches() {
   const leagueSearchedValue = useRecoilValue(searchedLeagueValue);
-  const {data:tableDetails} = useTableStanding()
-  const maxPlayed = Math.max(...tableDetails.map((team) => team.intPlayed));
-  const { data: nextEvents ,refetch } = useNextMatches(Number(leagueSearchedValue[0]?.idLeague),maxPlayed);
+  const yearValue = useRecoilValue(FilterdYearValue);
   const selectedLeagueStatus = useRecoilValue(isSelectedLeagueaValue);
+  const selectedYearStatus = useRecoilValue(isSelectedYearValue);
 
-  
-if(selectedLeagueStatus){
-  refetch()
-}
-  
+
+  const { data: tableDetails } = useTableStanding();
+  const maxPlayed = Math.max(...tableDetails.map((team) => team.intPlayed));
+  const { data: nextEvents, refetch } = useNextMatches(
+    Number(leagueSearchedValue[0]?.idLeague),
+    maxPlayed,
+    yearValue[0]?.value
+  );
+
+  if (selectedLeagueStatus || selectedYearStatus) {
+    refetch();
+  }
+
+  console.log(nextEvents);
   
 
   return (
     <>
       <div className="flex justify-center font-bold">
-        <h1>NEXT EVENTS</h1>
+        {yearValue[0]?.value=='2023-2024'?<h1>NEXT EVENTS</h1> :<h1> EVENTS</h1>}
       </div>
       <div className="grid sm:grid-cols-4 grid-cols-2 gap-8 m-4">
         {nextEvents?.events.map((event) => (
