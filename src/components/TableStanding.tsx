@@ -19,7 +19,6 @@ const useTableStanding = () => {
     isLoading,
   } = useSearchLeague(Number(searchedValue[0]?.idLeague), yearValue[0]?.value);
 
-  console.log(league);
   if (selectedLeagueStatus || selectedYearStatus) {
     refetch();
   }
