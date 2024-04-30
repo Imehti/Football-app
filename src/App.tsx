@@ -24,10 +24,12 @@ function App() {
          <Spin size="large" />
        </Flex>
       ) : (
+      <>
         <Table columns={columns} dataSource={data} />
+        <NextMatches /></>
       )}
 
-      <NextMatches />
+      
     </>
   );
 }
