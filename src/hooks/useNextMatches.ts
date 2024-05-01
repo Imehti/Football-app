@@ -18,7 +18,9 @@ interface Events {
   intHomeScore:string;
   strStatus:string;
   strSquare:string;
-
+  strVideo:string;
+  strBanner:string;
+  strThumb:string
 }
 export interface NextEvents {
   events: Events[];

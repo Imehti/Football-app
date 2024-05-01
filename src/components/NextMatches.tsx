@@ -47,35 +47,22 @@ function NextMatches() {
           ) &&
           nextEvents?.events.map((event) => (
             <>
-              {" "}
-              <div className="border border-gray-500 flex flex-col rounded p-2">
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="flex">
-                    <img
-                      className="w-8 h-8"
-                      src={event.strHomeTeamBadge}
-                      alt={event.strHomeTeam}
-                    />
-                    <span className="ml-1">{event.strHomeTeam}</span>
-                  </div>
-                  <div>
-                    <span>{event.dateEvent}</span>
-                  </div>
+  
+               <div className={`relative ${event.strLeague!=='English Premier League'?'border border-gray-400 rounded-lg':''} `}>
+                <img
+                  className="aspect-square rounded-lg object-fill"
+                  src={event.strSquare?event.strSquare : event.strThumb}
+                  alt=""
+                />
+                   <div className="bottom-8 left-5 bot absolute">
+                  <span className="text-black font-bold">{event.dateEvent}</span>
                 </div>
-
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="flex mt-2">
-                    <img
-                      className="w-8 h-8"
-                      src={event.strAwayTeamBadge}
-                      alt={event.strAwayTeam}
-                    />
-                    <span className="ml-1">{event.strAwayTeam}</span>
-                  </div>
-                  <div>
-                    <span>{event.strTime}</span>
-                  </div>
+                <div className="bottom-8 right-5 bot absolute">
+                  <span className="text-black font-bold">
+                    {event.strTime}
+                  </span>
                 </div>
+               
               </div>
             </>
           ))}
