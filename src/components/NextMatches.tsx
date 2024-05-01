@@ -15,8 +15,6 @@ function NextMatches() {
   const selectedYearStatus = useRecoilValue(isSelectedYearValue);
   const roundValue = useRecoilValue(FilterdRoundValue);
 
-  console.log(roundValue);
-
   const { data: tableDetails } = useTableStanding();
   const maxPlayed = Math.max(...tableDetails.map((team) => team.intPlayed));
   const { data: nextEvents, refetch } = useNextMatches(
@@ -29,7 +27,7 @@ function NextMatches() {
     refetch();
   }
 
-  console.log(nextEvents);
+  console.log(nextEvents?.events);
 
   return (
     <>
@@ -43,6 +41,10 @@ function NextMatches() {
       </div>
       <div className="grid sm:grid-cols-4 grid-cols-2 gap-8 m-4">
         {nextEvents?.events &&
+          nextEvents.events.some(
+            (event) =>
+              event.strStatus !== null && event.strStatus !== "Match Finished"
+          ) &&
           nextEvents?.events.map((event) => (
             <>
               {" "}
@@ -84,6 +86,30 @@ function NextMatches() {
             Please Select Season From 2012-2013
           </h1>
         )}
+      </div>
+      <div className="grid sm:grid-cols-5 grid-cols-2 gap-12 m-2">
+        {nextEvents?.events &&
+          nextEvents.events.some(
+            (event) =>
+              event.strStatus === null || event.strStatus === "Match Finished"
+          ) &&
+          nextEvents?.events.map((e) => (
+            <>
+              <div className="relative">
+                <img
+                  className="aspect-square rounded-lg object-fill"
+                  src={e.strPoster}
+                  alt=""
+                />
+                <div className="top-2/3 left-1/4 bot absolute">
+                  <span className="text-white font-bold">{e.intHomeScore}</span>
+                </div>
+                <div className="top-2/3 right-1/4 bot absolute">
+                  <span className="text-white font-extrabold">{e.intAwayScore}</span>
+                </div>
+              </div>
+            </>
+          ))}
       </div>
     </>
   );
