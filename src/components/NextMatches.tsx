@@ -98,16 +98,19 @@ function NextMatches() {
               <div className="relative">
                 <img
                   className="aspect-square rounded-lg object-fill"
-                  src={e.strPoster}
+                  src={e.strSquare}
                   alt=""
                 />
-                <div className="top-2/3 left-1/4 bot absolute">
+                <div className="bottom-5 left-1/4 bot absolute">
                   <span className="text-white font-bold">{e.intHomeScore}</span>
                 </div>
-                <div className="top-2/3 right-1/4 bot absolute">
-                  <span className="text-white font-extrabold">{e.intAwayScore}</span>
+                <div className="bottom-5 right-1/4 bot absolute">
+                  <span className="text-white font-extrabold">
+                    {e.intAwayScore}
+                  </span>
                 </div>
               </div>
+             
             </>
           ))}
       </div>
