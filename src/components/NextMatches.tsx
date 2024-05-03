@@ -7,6 +7,7 @@ import FilterdYearValue from "../recoil/selector/FilterdYearValue";
 import isSelectedYearValue from "../recoil/selector/isSelectedYearValue";
 import FilterRound from "./FilterRound";
 import FilterdRoundValue from "../recoil/selector/FilterRoundValue";
+import Loading from "./Loading";
 
 function NextMatches() {
   const leagueSearchedValue = useRecoilValue(searchedLeagueValue);
@@ -17,7 +18,7 @@ function NextMatches() {
 
   const { data: tableDetails } = useTableStanding();
   const maxPlayed = Math.max(...tableDetails.map((team) => team.intPlayed));
-  const { data: nextEvents, refetch } = useNextMatches(
+  const { data: nextEvents, refetch , isLoading} = useNextMatches(
     Number(leagueSearchedValue[0]?.idLeague),
     maxPlayed,
     yearValue[0]?.value,
@@ -88,7 +89,7 @@ function NextMatches() {
       </div>
 
       <div className="grid sm:grid-cols-4 grid-cols-2 gap-12 m-2">
-        {nextEvents?.events &&
+      {isLoading ? <Loading /> : <> {nextEvents?.events &&
           nextEvents.events.some(
             (event) =>
               event.strStatus === null || event.strStatus === "Match Finished"
@@ -122,7 +123,10 @@ function NextMatches() {
               </div>
             </div>
           ))}
+        </>}
+      
       </div>
+     
     </>
   );
 }

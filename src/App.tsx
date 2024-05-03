@@ -1,10 +1,10 @@
 import { Table } from "antd";
-import { Flex,Spin } from 'antd';
 import SearchLeague from "./components/SearchLeague";
 import useTableStanding from "./components/TableStanding";
 import FilterYear from "./components/FilterYear";
 import NextMatches from "./components/NextMatches";
 import FilterRound from "./components/FilterRound";
+import Loading from "./components/Loading";
 
 function App() {
   const { columns, data, leagueName, isLoading } = useTableStanding();
@@ -19,11 +19,7 @@ function App() {
       </div>
 
       {isLoading ? (
-         <Flex align="center" gap="middle">
-         <Spin size="small" />
-         <Spin />
-         <Spin size="large" />
-       </Flex>
+     <Loading />
       ) : (
       <>
         <Table columns={columns} dataSource={data} />
