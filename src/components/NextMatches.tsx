@@ -39,7 +39,7 @@ function NextMatches() {
           <h1> EVENTS</h1>
         )}
       </div>
-      <div className="grid sm:grid-cols-4 grid-cols-2 gap-8 m-4">
+      <div className="grid sm:grid-cols-5 grid-cols-2 gap-8 m-4">
         {nextEvents?.events &&
           nextEvents.events.some(
             (event) =>
@@ -54,10 +54,10 @@ function NextMatches() {
                   src={event.strSquare?event.strSquare : event.strThumb}
                   alt=""
                 />
-                   <div className="bottom-8 left-5 bot absolute">
+                   <div className="bottom-5 left-5 bot absolute">
                   <span className="text-black font-bold">{event.dateEvent}</span>
                 </div>
-                <div className="bottom-8 right-5 bot absolute">
+                <div className="bottom-5 right-5 bot absolute">
                   <span className="text-black font-bold">
                     {event.strTime}
                   </span>
@@ -85,7 +85,7 @@ function NextMatches() {
               <div className="relative">
                 <img
                   className="aspect-square rounded-lg object-fill"
-                  src={e.strSquare}
+                  src={e.strThumb}
                   alt=""
                 />
                 <div className="bottom-5 left-1/4 bot absolute">
