@@ -27,9 +27,9 @@ function NextMatches() {
   if (selectedLeagueStatus || selectedYearStatus) {
     refetch();
   }
-  
- console.log(roundValue);
- 
+
+  console.log(roundValue);
+
   return (
     <>
       <div className="grid grid-cols-2 m-2 items-center font-bold">
@@ -42,8 +42,15 @@ function NextMatches() {
           </div>
         ) : (
           <div className="flex">
-            <h1 className="mr-3"> EVENTS</h1>
-            {roundValue?.length!==0 ? <h2> Round {roundValue?.map((round) => round.value).join()}</h2> : <h2>Round {maxPlayed===38 ? maxPlayed : maxPlayed+1}</h2> }
+            <h1 className="mr-3 italic"> EVENTS</h1>
+            {roundValue?.length !== 0 ? (
+              <h2 className="italic">
+                {" "}
+                Round {roundValue?.map((round) => round.value).join()}
+              </h2>
+            ) : (
+              <h2 className="italic">Round {maxPlayed === 38 ? maxPlayed : maxPlayed + 1}</h2>
+            )}
           </div>
         )}
       </div>
