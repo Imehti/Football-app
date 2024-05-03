@@ -47,22 +47,26 @@ function NextMatches() {
           ) &&
           nextEvents?.events.map((event) => (
             <>
-  
-               <div className={`relative ${event.strLeague!=='English Premier League'?'border border-gray-400 rounded-lg':''} `}>
+              <div
+                className={`relative ${
+                  event.strLeague !== "English Premier League"
+                    ? "border border-gray-400 rounded-lg"
+                    : ""
+                } `}
+              >
                 <img
                   className="aspect-square rounded-lg object-fill"
-                  src={event.strSquare?event.strSquare : event.strThumb}
+                  src={event.strSquare ? event.strSquare : event.strThumb}
                   alt=""
                 />
-                   <div className="bottom-5 left-5 bot absolute">
-                  <span className="text-black font-bold">{event.dateEvent}</span>
-                </div>
-                <div className="bottom-5 right-5 bot absolute">
+                <div className="bottom-5 left-5 bot absolute">
                   <span className="text-black font-bold">
-                    {event.strTime}
+                    {event.dateEvent}
                   </span>
                 </div>
-               
+                <div className="bottom-5 right-5 bot absolute">
+                  <span className="text-black font-bold">{event.strTime}</span>
+                </div>
               </div>
             </>
           ))}
@@ -75,46 +79,40 @@ function NextMatches() {
         )}
       </div>
       <div className="grid sm:grid-cols-5 grid-cols-2 gap-12 m-2">
-        {nextEvents?.events &&
-          nextEvents.events.some(
-            (event) =>
-              event.strStatus === null || event.strStatus === "Match Finished"
-          ) &&
-          nextEvents?.events.map((e) => (
-            <>
-                          <div className="border border-gray-500 flex flex-col rounded p-2">
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="flex justify-center items-center">
-                    <img
-                      className="w-8 h-8"
-                      src={e.strHomeTeamBadge}
-                      alt={e.strHomeTeam}
-                    />
-                    <span className="ml-1">{e.strHomeTeam}</span>
-                  </div>
-                  <div>
-                    <span>{e.intHomeScore}</span>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="flex mt-2 justify-center items-center">
-                    <img
-                      className="w-8 h-8"
-                      src={e.strAwayTeamBadge}
-                      alt={e.strAwayTeam}
-                    />
-                    <span className="ml-1">{e.strAwayTeam}</span>
-                  </div>
-                    <span>{e.intAwayScore}</span>
-                  <div>
-                  </div>
-                </div>
-              </div>
-             
-            </>
-          ))}
+  {nextEvents?.events &&
+    nextEvents.events.some(
+      (event) =>
+        event.strStatus === null || event.strStatus === "Match Finished"
+    ) &&
+    nextEvents?.events.map((e) => (
+      <div className="border border-gray-500 flex flex-row justify-between items-center rounded p-2">
+        <div className="flex flex-col items-center">
+          <img
+            className="w-8 h-8"
+            src={
+              tableDetails.find((team) => team.strTeam === e.strHomeTeam)
+                ?.strTeamBadge
+            }
+            alt={e.strHomeTeam}
+          />
+          <span className="ml-1">{e.strHomeTeam}</span>
+          <span>{e.intHomeScore}</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <img
+            className="w-8 h-8"
+            src={
+              tableDetails.find((team) => team.strTeam === e.strAwayTeam)
+                ?.strTeamBadge
+            }
+            alt={e.strAwayTeam}
+          />
+          <span className="ml-1">{e.strAwayTeam}</span>
+          <span>{e.intAwayScore}</span>
+        </div>
       </div>
+    ))}
+</div>
     </>
   );
 }
