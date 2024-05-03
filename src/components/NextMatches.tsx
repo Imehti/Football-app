@@ -82,19 +82,33 @@ function NextMatches() {
           ) &&
           nextEvents?.events.map((e) => (
             <>
-              <div className="relative">
-                <img
-                  className="aspect-square rounded-lg object-fill"
-                  src={e.strThumb}
-                  alt=""
-                />
-                <div className="bottom-5 left-1/4 bot absolute">
-                  <span className="text-white font-bold">{e.intHomeScore}</span>
+                          <div className="border border-gray-500 flex flex-col rounded p-2">
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="flex justify-center items-center">
+                    <img
+                      className="w-8 h-8"
+                      src={e.strHomeTeamBadge}
+                      alt={e.strHomeTeam}
+                    />
+                    <span className="ml-1">{e.strHomeTeam}</span>
+                  </div>
+                  <div>
+                    <span>{e.intHomeScore}</span>
+                  </div>
                 </div>
-                <div className="bottom-5 right-1/4 bot absolute">
-                  <span className="text-white font-extrabold">
-                    {e.intAwayScore}
-                  </span>
+
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="flex mt-2 justify-center items-center">
+                    <img
+                      className="w-8 h-8"
+                      src={e.strAwayTeamBadge}
+                      alt={e.strAwayTeam}
+                    />
+                    <span className="ml-1">{e.strAwayTeam}</span>
+                  </div>
+                    <span>{e.intAwayScore}</span>
+                  <div>
+                  </div>
                 </div>
               </div>
              
