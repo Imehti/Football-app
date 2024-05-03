@@ -20,23 +20,31 @@ function NextMatches() {
   const { data: nextEvents, refetch } = useNextMatches(
     Number(leagueSearchedValue[0]?.idLeague),
     maxPlayed,
-    yearValue[0]?.value
+    yearValue[0]?.value,
+    Number(roundValue.map((round) => round.value).join())
   );
 
   if (selectedLeagueStatus || selectedYearStatus) {
     refetch();
   }
-
-  console.log(nextEvents?.events);
-
+  
+ console.log(roundValue);
+ 
   return (
     <>
       <div className="grid grid-cols-2 m-2 items-center font-bold">
         <FilterRound />
         {yearValue[0]?.value == "2023-2024" ? (
-          <h1>NEXT EVENTS</h1>
+          <div>
+            {" "}
+            <h1>NEXT EVENTS Round </h1>
+            <span>{roundValue?.map((round) => round.value).join()}</span>
+          </div>
         ) : (
-          <h1> EVENTS</h1>
+          <div className="flex">
+            <h1 className="mr-3"> EVENTS</h1>
+            {roundValue?.length!==0 ? <h2> Round {roundValue?.map((round) => round.value).join()}</h2> : <h2>Round {maxPlayed===38 ? maxPlayed : maxPlayed+1}</h2> }
+          </div>
         )}
       </div>
       <div className="grid sm:grid-cols-5 grid-cols-2 gap-8 m-4">
@@ -71,48 +79,42 @@ function NextMatches() {
             </>
           ))}
       </div>
-      <div className="flex justify-center mb-2">
-        {!nextEvents?.events && (
-          <h1 className="font-bold text-red-700">
-            Please Select Season From 2012-2013
-          </h1>
-        )}
-      </div>
+
       <div className="grid sm:grid-cols-5 grid-cols-2 gap-12 m-2">
-  {nextEvents?.events &&
-    nextEvents.events.some(
-      (event) =>
-        event.strStatus === null || event.strStatus === "Match Finished"
-    ) &&
-    nextEvents?.events.map((e) => (
-      <div className="border border-gray-500 flex flex-row justify-between items-center rounded p-2">
-        <div className="flex flex-col items-center">
-          <img
-            className="w-8 h-8"
-            src={
-              tableDetails.find((team) => team.strTeam === e.strHomeTeam)
-                ?.strTeamBadge
-            }
-            alt={e.strHomeTeam}
-          />
-          <span className="ml-1">{e.strHomeTeam}</span>
-          <span>{e.intHomeScore}</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <img
-            className="w-8 h-8"
-            src={
-              tableDetails.find((team) => team.strTeam === e.strAwayTeam)
-                ?.strTeamBadge
-            }
-            alt={e.strAwayTeam}
-          />
-          <span className="ml-1">{e.strAwayTeam}</span>
-          <span>{e.intAwayScore}</span>
-        </div>
+        {nextEvents?.events &&
+          nextEvents.events.some(
+            (event) =>
+              event.strStatus === null || event.strStatus === "Match Finished"
+          ) &&
+          nextEvents?.events.map((e) => (
+            <div className="border border-gray-500 flex flex-row justify-between items-center rounded p-2">
+              <div className="flex flex-col items-center">
+                <img
+                  className="w-8 h-8"
+                  src={
+                    tableDetails.find((team) => team.strTeam === e.strHomeTeam)
+                      ?.strTeamBadge
+                  }
+                  alt={e.strHomeTeam}
+                />
+                <span className="ml-1">{e.strHomeTeam}</span>
+                <span>{e.intHomeScore}</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <img
+                  className="w-8 h-8"
+                  src={
+                    tableDetails.find((team) => team.strTeam === e.strAwayTeam)
+                      ?.strTeamBadge
+                  }
+                  alt={e.strAwayTeam}
+                />
+                <span className="ml-1">{e.strAwayTeam}</span>
+                <span>{e.intAwayScore}</span>
+              </div>
+            </div>
+          ))}
       </div>
-    ))}
-</div>
     </>
   );
 }
