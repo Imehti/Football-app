@@ -87,7 +87,7 @@ function NextMatches() {
           ))}
       </div>
 
-      <div className="grid sm:grid-cols-5 grid-cols-2 gap-12 m-2">
+      <div className="grid sm:grid-cols-4 grid-cols-2 gap-12 m-2">
         {nextEvents?.events &&
           nextEvents.events.some(
             (event) =>
@@ -104,9 +104,10 @@ function NextMatches() {
                   }
                   alt={e.strHomeTeam}
                 />
-                <span className="ml-1">{e.strHomeTeam}</span>
+                <span className="">{e.strHomeTeam}</span>
                 <span>{e.intHomeScore}</span>
               </div>
+              <div className="border border-gray-300 h-1/2"></div>
               <div className="flex flex-col items-center">
                 <img
                   className="w-8 h-8"
@@ -116,7 +117,7 @@ function NextMatches() {
                   }
                   alt={e.strAwayTeam}
                 />
-                <span className="ml-1">{e.strAwayTeam}</span>
+                <span className="">{e.strAwayTeam}</span>
                 <span>{e.intAwayScore}</span>
               </div>
             </div>
