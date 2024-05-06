@@ -3,11 +3,11 @@ import SearchLeague from "./components/SearchLeague";
 import useTableStanding from "./components/TableStanding";
 import FilterYear from "./components/FilterYear";
 import NextMatches from "./components/NextMatches";
-import FilterRound from "./components/FilterRound";
 import Loading from "./components/Loading";
 
 function App() {
   const { columns, data, leagueName, isLoading } = useTableStanding();
+
   return (
     <>
       <div className="sm:grid grid-cols-3 m-4">
@@ -19,13 +19,13 @@ function App() {
       </div>
 
       {isLoading ? (
-     <Loading />
+        <Loading />
       ) : (
-      <>
-        <Table columns={columns} dataSource={data} />
-        <NextMatches /></>
+        <>
+          <Table columns={columns} dataSource={data} />
+          <NextMatches />
+        </>
       )}
-
     </>
   );
 }
