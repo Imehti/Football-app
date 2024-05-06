@@ -21,6 +21,7 @@ interface Events {
   strVideo: string;
   strBanner: string;
   strThumb: string;
+  strFilename:string;
 }
 export interface NextEvents {
   events: Events[];
