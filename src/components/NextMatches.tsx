@@ -1,4 +1,4 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import useNextMatches from "../hooks/useNextMatches";
 import searchedLeagueValue from "../recoil/selector/SearchedLeagueValue";
 import useTableStanding from "./TableStanding";
@@ -8,6 +8,7 @@ import isSelectedYearValue from "../recoil/selector/isSelectedYearValue";
 import FilterRound from "./FilterRound";
 import FilterdRoundValue from "../recoil/selector/FilterRoundValue";
 import Loading from "./Loading";
+import EventDetailsState from "../recoil/atom/EventFileNameState";
 
 function NextMatches() {
   const leagueSearchedValue = useRecoilValue(searchedLeagueValue);
@@ -15,6 +16,8 @@ function NextMatches() {
   const selectedLeagueStatus = useRecoilValue(isSelectedLeagueaValue);
   const selectedYearStatus = useRecoilValue(isSelectedYearValue);
   const roundValue = useRecoilValue(FilterdRoundValue);
+  const [eventFileName,setEventFileName]=useRecoilState(EventDetailsState)
+  //make another component to show event details by using new api and use eventFileName as parametr
 
   const { data: tableDetails } = useTableStanding();
   const maxPlayed = Math.max(...tableDetails.map((team) => team.intPlayed));
@@ -31,6 +34,8 @@ function NextMatches() {
     Number(roundValue.map((round) => round.value).join())
   );
 
+  console.log(eventFileName);
+  
   if (isError) {
     return (
       <>
@@ -123,10 +128,11 @@ function NextMatches() {
                   <div
                     key={e.strFilename}
                     onClick={() =>
-                   //make atom for match details and set this value(array) to it
-                        nextEvents?.events?.filter(
-                          (match) => match.strFilename === e.strFilename
-                        )
+                  
+                       setEventFileName(nextEvents?.events?.filter(
+                        (match) => match.strFilename === e.strFilename
+                      ).map(match=>match.strFilename).join(''))
+                       
                      
                     }
                     className="border-1 shadow-xl shadow-slate-300 flex flex-row justify-between items-center rounded-xl p-2"
