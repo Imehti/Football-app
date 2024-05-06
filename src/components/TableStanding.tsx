@@ -122,7 +122,7 @@ const useTableStanding = () => {
   ];
 
   const CircleForm = ({ form }: { form: string }) => {
-    const formArray = form.split("");
+    const formArray = form.split("").reverse();
     const circleSize = 24;
 
     return (
