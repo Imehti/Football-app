@@ -31,8 +31,6 @@ function NextMatches() {
     Number(roundValue.map((round) => round.value).join())
   );
 
-  console.log(nextEvents);
-  
   if (isError) {
     return (
       <>
@@ -122,7 +120,17 @@ function NextMatches() {
                     event.strStatus === "Match Finished"
                 ) &&
                 nextEvents?.events.map((e) => (
-                  <div className="border-1 shadow-xl shadow-slate-300 flex flex-row justify-between items-center rounded-xl p-2">
+                  <div
+                    key={e.strFilename}
+                    onClick={() =>
+                   //make atom for match details and set this value(array) to it
+                        nextEvents?.events?.filter(
+                          (match) => match.strFilename === e.strFilename
+                        )
+                     
+                    }
+                    className="border-1 shadow-xl shadow-slate-300 flex flex-row justify-between items-center rounded-xl p-2"
+                  >
                     <div className="flex flex-col items-center">
                       <img
                         className="w-8 h-8"
