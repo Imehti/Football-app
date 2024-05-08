@@ -2,11 +2,34 @@ import { useQuery } from "@tanstack/react-query";
 import apiClient from "../services/api-client";
 
 
-const useEventDetails = () => 
-useQuery({
-    queryKey:['eventDetails'],
-    queryFn:()=> apiClient.get('searchfilename.php?e=English_Premier_League_2015-04-26_Arsenal_vs_Chelsea')
-    .then(res => res.data)
-})
+export interface EventDetails{
+    event:Event[]
+}
+interface Event{
+    idEvent:string;
+    dateEvent:string;
+    intAwayScore:string;
+    intHomeScore:string;
+    intRound:string;
+    intSpectators:string;
+    strAwayTeam:string;
+    strHomeTeam:string;
+    strDescriptionEN:string;
+    strFanart:string;
+    strFilename:string;
+    strMap:string;
 
-export default useEventDetails
+}
+
+const useEventDetails = (fileName:string) =>
+  useQuery({
+    queryKey: ["eventDetails",fileName],
+    queryFn: () =>
+      apiClient
+        .get(
+          "searchfilename.php?e=English_Premier_League_2015-04-26_Arsenal_vs_Chelsea"
+        )
+        .then((res) => res.data),
+  });
+
+export default useEventDetails;
