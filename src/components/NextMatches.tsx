@@ -17,7 +17,7 @@ function NextMatches() {
   const selectedYearStatus = useRecoilValue(isSelectedYearValue);
   const roundValue = useRecoilValue(FilterdRoundValue);
   const [eventFileName, setEventFileName] = useRecoilState(FileNameState);
-  //make another component to show event details by using new api and use eventFileName as parametr
+
 
   const { data: tableDetails } = useTableStanding();
   const maxPlayed = Math.max(...tableDetails.map((team) => team.intPlayed));
@@ -88,6 +88,16 @@ function NextMatches() {
             nextEvents?.events.map((event) => (
               <>
                 <div
+                onClick={() =>
+                  setEventFileName(
+                    nextEvents?.events
+                      ?.filter(
+                        (match) => match.strFilename === event.strFilename
+                      )
+                      .map((match) => match.strFilename)
+                      .join("")
+                  )
+                }
                   className={`relative ${
                     event.strLeague !== "English Premier League"
                       ? "border border-gray-400 rounded-lg"
