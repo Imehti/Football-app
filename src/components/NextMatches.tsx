@@ -16,7 +16,7 @@ function NextMatches() {
   const selectedLeagueStatus = useRecoilValue(isSelectedLeagueaValue);
   const selectedYearStatus = useRecoilValue(isSelectedYearValue);
   const roundValue = useRecoilValue(FilterdRoundValue);
-  const [eventFileName,setEventFileName]=useRecoilState(EventDetailsState)
+  const [eventFileName, setEventFileName] = useRecoilState(EventDetailsState);
   //make another component to show event details by using new api and use eventFileName as parametr
 
   const { data: tableDetails } = useTableStanding();
@@ -35,7 +35,7 @@ function NextMatches() {
   );
 
   console.log(eventFileName);
-  
+
   if (isError) {
     return (
       <>
@@ -57,7 +57,8 @@ function NextMatches() {
         {yearValue[0]?.value == "2023-2024" ? (
           <div>
             {" "}
-            <h1>NEXT EVENTS Round </h1>
+            <h1 className="text-black text-2xl">NEXT EVENTS </h1>
+            <span className="text-lg">Round </span>
             <span>{roundValue?.map((round) => round.value).join()}</span>
           </div>
         ) : (
@@ -128,14 +129,16 @@ function NextMatches() {
                   <div
                     key={e.strFilename}
                     onClick={() =>
-                  
-                       setEventFileName(nextEvents?.events?.filter(
-                        (match) => match.strFilename === e.strFilename
-                      ).map(match=>match.strFilename).join(''))
-                       
-                     
+                      setEventFileName(
+                        nextEvents?.events
+                          ?.filter(
+                            (match) => match.strFilename === e.strFilename
+                          )
+                          .map((match) => match.strFilename)
+                          .join("")
+                      )
                     }
-                    className="border-1 shadow-xl shadow-slate-300 flex flex-row justify-between items-center rounded-xl p-2"
+                    className={`border-1 shadow-lg shadow-slate-300 flex flex-row justify-between items-center rounded-xl p-2 transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:bg-cyan-500`}
                   >
                     <div className="flex flex-col items-center">
                       <img
