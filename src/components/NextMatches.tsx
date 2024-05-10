@@ -8,7 +8,7 @@ import isSelectedYearValue from "../recoil/selector/isSelectedYearValue";
 import FilterRound from "./FilterRound";
 import FilterdRoundValue from "../recoil/selector/FilterRoundValue";
 import Loading from "./Loading";
-import EventDetailsState from "../recoil/atom/EventFileNameState";
+import FileNameState from "../recoil/atom/FileNameState";
 
 function NextMatches() {
   const leagueSearchedValue = useRecoilValue(searchedLeagueValue);
@@ -16,7 +16,7 @@ function NextMatches() {
   const selectedLeagueStatus = useRecoilValue(isSelectedLeagueaValue);
   const selectedYearStatus = useRecoilValue(isSelectedYearValue);
   const roundValue = useRecoilValue(FilterdRoundValue);
-  const [eventFileName, setEventFileName] = useRecoilState(EventDetailsState);
+  const [eventFileName, setEventFileName] = useRecoilState(FileNameState);
   //make another component to show event details by using new api and use eventFileName as parametr
 
   const { data: tableDetails } = useTableStanding();
