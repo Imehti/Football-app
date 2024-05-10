@@ -4,6 +4,7 @@ import useTableStanding from "./components/TableStanding";
 import FilterYear from "./components/FilterYear";
 import NextMatches from "./components/NextMatches";
 import Loading from "./components/Loading";
+import EventDetails from "./components/EventDetails";
 
 function App() {
   const { columns, data, leagueName, isLoading } = useTableStanding();
@@ -26,6 +27,7 @@ function App() {
           <NextMatches />
         </>
       )}
+      <EventDetails />
     </>
   );
 }

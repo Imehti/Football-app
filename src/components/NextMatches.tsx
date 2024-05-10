@@ -34,7 +34,6 @@ function NextMatches() {
     Number(roundValue.map((round) => round.value).join())
   );
 
-  console.log(eventFileName);
 
   if (isError) {
     return (

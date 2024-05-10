@@ -26,8 +26,8 @@ const useEventDetails = (fileName:string) =>
     queryKey: ["eventDetails",fileName],
     queryFn: () =>
       apiClient
-        .get<EventDetails>(
-          "searchfilename.php?e=English_Premier_League_2015-04-26_Arsenal_vs_Chelsea"
+        .get<EventDetails>(//fix here
+          `searchfilename.php?e=${fileName && fileName!==null ?'English_Premier_League_2024-05-13_Aston_Villa_vs_Liverpool' : fileName }`
         )
         .then((res) => res.data),
   });
