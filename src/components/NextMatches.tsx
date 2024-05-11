@@ -9,6 +9,7 @@ import FilterRound from "./FilterRound";
 import FilterdRoundValue from "../recoil/selector/FilterRoundValue";
 import Loading from "./Loading";
 import FileNameState from "../recoil/atom/FileNameState";
+import isSelectedEventState from "../recoil/atom/isSelectedEventState";
 
 function NextMatches() {
   const leagueSearchedValue = useRecoilValue(searchedLeagueValue);
@@ -17,7 +18,7 @@ function NextMatches() {
   const selectedYearStatus = useRecoilValue(isSelectedYearValue);
   const roundValue = useRecoilValue(FilterdRoundValue);
   const [eventFileName, setEventFileName] = useRecoilState(FileNameState);
-
+  const [isSelectedEvent, setIsSelectedEvent] =useRecoilState(isSelectedEventState);
 
   const { data: tableDetails } = useTableStanding();
   const maxPlayed = Math.max(...tableDetails.map((team) => team.intPlayed));
@@ -33,7 +34,6 @@ function NextMatches() {
     yearValue[0]?.value,
     Number(roundValue.map((round) => round.value).join())
   );
-
 
   if (isError) {
     return (
@@ -87,16 +87,17 @@ function NextMatches() {
             nextEvents?.events.map((event) => (
               <>
                 <div
-                onClick={() =>
-                  setEventFileName(
-                    nextEvents?.events
-                      ?.filter(
-                        (match) => match.strFilename === event.strFilename
-                      )
-                      .map((match) => match.strFilename)
-                      .join("")
-                  )
-                }
+                  onClick={() => {
+                    setIsSelectedEvent(true);
+                    setEventFileName(
+                      nextEvents?.events
+                        ?.filter(
+                          (match) => match.strFilename === event.strFilename
+                        )
+                        .map((match) => match.strFilename)
+                        .join("")
+                    );
+                  }}
                   className={`relative ${
                     event.strLeague !== "English Premier League"
                       ? "border border-gray-400 rounded-lg"
@@ -137,7 +138,8 @@ function NextMatches() {
                 nextEvents?.events.map((e) => (
                   <div
                     key={e.strFilename}
-                    onClick={() =>
+                    onClick={() => {
+                      setIsSelectedEvent(true);
                       setEventFileName(
                         nextEvents?.events
                           ?.filter(
@@ -145,8 +147,8 @@ function NextMatches() {
                           )
                           .map((match) => match.strFilename)
                           .join("")
-                      )
-                    }
+                      );
+                    }}
                     className={`border-1 shadow-lg shadow-slate-300 flex flex-row justify-between items-center rounded-xl p-2 transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:bg-cyan-500`}
                   >
                     <div className="flex flex-col items-center">
