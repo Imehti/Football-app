@@ -30,6 +30,7 @@ const useEventDetails = (fileName:string) =>
           `searchfilename.php?e=${fileName && fileName!==null &&fileName  }`
         )
         .then((res) => res.data),
+        enabled:false
   });
 
 export default useEventDetails;
