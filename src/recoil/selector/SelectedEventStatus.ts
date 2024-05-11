@@ -1,4 +1,4 @@
-import { get } from "lodash";
+
 import { selector } from "recoil";
 import isSelectedEventState from "../atom/isSelectedEventState";
 
