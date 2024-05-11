@@ -6,24 +6,12 @@ function EventDetails(){
     const fileName=useRecoilValue(FileNameValue)
 
 
-    const leagueEndIndex = fileName.indexOf("2");
-    const league = fileName.substring(0, leagueEndIndex).replace(/ /g,"_")
-
-    
-    
-    const dateStartIndex = leagueEndIndex;
-    const dateEndIndex = fileName.indexOf(" ", dateStartIndex);
-    const date = fileName.substring(dateStartIndex, dateEndIndex);
-    
-    const teamsStartIndex = dateEndIndex + 1;
-    const teamsEndIndex = fileName.length;
-    const teams = fileName.substring(teamsStartIndex, teamsEndIndex).replace(/ /g,"_");
-    
-    const parseFileName=league+date+"_"+teams
  
     
 
-    const {data:eventDetails}=useEventDetails(parseFileName)
+    const {data:eventDetails}=useEventDetails(fileName.replace(/ /g,"_"))
+    console.log(eventDetails?.event.map(e=>e.strFilename));
+    
     
     //fix the map
 return(
