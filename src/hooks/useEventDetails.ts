@@ -27,7 +27,7 @@ const useEventDetails = (fileName:string) =>
     queryFn: () =>
       apiClient
         .get<EventDetails>(//fix here
-          `searchfilename.php?e=${fileName && fileName!==null ?'English_Premier_League_2024-05-13_Aston_Villa_vs_Liverpool' : fileName }`
+          `searchfilename.php?e=${fileName && fileName!==null &&fileName  }`
         )
         .then((res) => res.data),
   });
