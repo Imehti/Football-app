@@ -15,9 +15,14 @@ const useTableStanding = () => {
   const {
     data: league,
     isError,
+    error,
     refetch,
     isLoading,
   } = useSearchLeague(Number(searchedValue[0]?.idLeague), yearValue[0]?.value);
+
+  if(isError){
+    <h1>{error.message}</h1>
+  }
 
   if (selectedLeagueStatus || selectedYearStatus) {
     refetch();
@@ -175,7 +180,7 @@ const useTableStanding = () => {
       }))) ||
     [];
 
-  return { columns, data, leagueName, isLoading };
+  return { columns, data, leagueName, isLoading , isError , error };
 };
 
 export default useTableStanding;
