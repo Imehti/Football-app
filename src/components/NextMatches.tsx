@@ -88,7 +88,7 @@ function NextMatches() {
               <>
                 <div
                   onClick={() => {
-                    setIsSelectedEvent(true);
+                    setIsSelectedEvent(!isSelectedEvent);
                     setEventFileName(
                       nextEvents?.events
                         ?.filter(
@@ -104,6 +104,7 @@ function NextMatches() {
                       : ""
                   } `}
                 >
+                  
                   <img
                     className="aspect-square rounded-lg object-fill"
                     src={event.strSquare ? event.strSquare : event.strThumb}
@@ -140,7 +141,7 @@ function NextMatches() {
                   <div
                     key={e.strFilename}
                     onClick={() => {
-                      setIsSelectedEvent(true);
+                      setIsSelectedEvent(!isSelectedEvent);
                       setEventFileName(
                         nextEvents?.events
                           ?.filter(
