@@ -131,8 +131,9 @@ function NextMatches() {
               {" "}
               {nextEvents?.events &&
   
-                nextEvents?.events.some(
+                nextEvents.events.some(
                   (event) =>
+                    event.strStatus === null ||
                     event.strStatus === "Match Finished"
                 ) &&
                 nextEvents?.events.map((e) => (
