@@ -7,7 +7,7 @@ import Loading from "./components/Loading";
 import EventDetails from "./components/EventDetails";
 
 function App() {
-  const { columns, data, leagueName, isLoading } = useTableStanding();
+  const { columns, data, leagueName, isLoading} = useTableStanding();
 
   return (
     <>
@@ -19,7 +19,9 @@ function App() {
         <h1 className="m-8 text-3xl italic font-bold">{leagueName}</h1>
       </div>
 
+
       {isLoading ? (
+ 
         <Loading />
       ) : (
         <>
