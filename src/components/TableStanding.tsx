@@ -23,7 +23,7 @@ const useTableStanding = () => {
     refetch();
   }
 
-  const leagueName = league?.table[0].strLeague;
+  const leagueName = league?.table[0] && league?.table[0]!==undefined ? league?.table[0].strLeague : '';
 
   const leagueSize: any = league?.table.length;
 
