@@ -9,7 +9,6 @@ import FilterRound from "./FilterRound";
 import FilterdRoundValue from "../recoil/selector/FilterRoundValue";
 import Loading from "./Loading";
 import FileNameState from "../recoil/atom/FileNameState";
-import isSelectedEventState from "../recoil/atom/isSelectedEventState";
 import { Link } from "react-router-dom";
 
 function NextMatches() {
@@ -18,9 +17,8 @@ function NextMatches() {
   const selectedLeagueStatus = useRecoilValue(isSelectedLeagueaValue);
   const selectedYearStatus = useRecoilValue(isSelectedYearValue);
   const roundValue = useRecoilValue(FilterdRoundValue);
-  const [eventFileName, setEventFileName] = useRecoilState(FileNameState);
-  const [isSelectedEvent, setIsSelectedEvent] =
-    useRecoilState(isSelectedEventState);
+  // const [isSelectedEvent, setIsSelectedEvent] =
+  //   useRecoilState(isSelectedEventState);
 
   const { data: tableDetails } = useTableStanding();
   const maxPlayed = Math.max(...tableDetails.map((team) => team.intPlayed));
@@ -90,15 +88,8 @@ function NextMatches() {
               <>
                 <div
                   onClick={() => {
-                    setIsSelectedEvent(!isSelectedEvent);
-                    setEventFileName(
-                      nextEvents?.events
-                        ?.filter(
-                          (match) => match.strFilename === event.strFilename
-                        )
-                        .map((match) => match.strFilename)
-                        .join("")
-                    );
+                    // setIsSelectedEvent(true);
+                 
                   }}
                   className={`relative ${
                     event.strLeague !== "English Premier League"
@@ -107,7 +98,7 @@ function NextMatches() {
                   } `}
                 >
                   <Link
-                    to={`/EventDetails/${eventFileName.replace(/ /g, "_")}`}
+                    to={`/EventDetails/${event.strFilename.replace(/ /g, "_")}`}
                   >
                     
                   <img
@@ -148,15 +139,8 @@ function NextMatches() {
                   <div
                     key={e.strFilename}
                     onClick={() => {
-                      setIsSelectedEvent(!isSelectedEvent);
-                      setEventFileName(
-                        nextEvents?.events
-                          ?.filter(
-                            (match) => match.strFilename === e.strFilename
-                          )
-                          .map((match) => match.strFilename)
-                          .join("")
-                      );
+                      // setIsSelectedEvent(true);
+               
                     }}
                     className={`border-1 shadow-lg shadow-slate-300 flex flex-row justify-between items-center rounded-xl p-2 transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:bg-cyan-500`}
                   >
