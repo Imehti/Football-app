@@ -1,30 +1,36 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import FileNameValue from "../recoil/selector/FileNameValue";
+
 import useEventDetails from "../hooks/useEventDetails";
-import selectedEventStatus from "../recoil/selector/SelectedEventStatus";
 import Loading from "./Loading";
+import { useParams } from "react-router-dom";
+
 
 
 function EventDetails() {
-  const fileName = useRecoilValue(FileNameValue);
+//fileName.replace(/ /g, "_")
+const params= useParams()
+  const {
+    data: eventDetails,
+    isLoading,
+  } = useEventDetails(params.eventName);
+  // const selectedEvent = useRecoilValue(selectedEventStatus);
+  console.log();
   
 
-  const { data: eventDetails , refetch , isLoading} = useEventDetails(fileName.replace(/ /g, "_"));
-  const selectedEvent=useRecoilValue(selectedEventStatus)
+  // React.useEffect(() => {
+  //   if (selectedEvent) {
+  //     refetch();
+  //   }
+  // }, [selectedEvent, refetch]);
 
-
-
-if(selectedEvent){
-    refetch()
-
-}
-  
-  
   return (
     <>
-    {isLoading && <Loading />}
-      <h1>{eventDetails?.event.map((match) => match.strFilename)}</h1>
-      <img src={eventDetails?.event.map((e) => e.strMap).join()} alt="" />
+      {isLoading && <Loading />}
+      {eventDetails && (
+        <>
+          <h1>{eventDetails.event.map((match) => match.strFilename)}</h1>
+          <img src={eventDetails.event.map((e) => e.strBanner).join()} alt="" />
+        </>
+      )}
     </>
   );
 }
