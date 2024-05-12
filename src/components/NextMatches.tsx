@@ -10,6 +10,7 @@ import FilterdRoundValue from "../recoil/selector/FilterRoundValue";
 import Loading from "./Loading";
 import FileNameState from "../recoil/atom/FileNameState";
 import isSelectedEventState from "../recoil/atom/isSelectedEventState";
+import { Link } from "react-router-dom";
 
 function NextMatches() {
   const leagueSearchedValue = useRecoilValue(searchedLeagueValue);
@@ -18,7 +19,8 @@ function NextMatches() {
   const selectedYearStatus = useRecoilValue(isSelectedYearValue);
   const roundValue = useRecoilValue(FilterdRoundValue);
   const [eventFileName, setEventFileName] = useRecoilState(FileNameState);
-  const [isSelectedEvent, setIsSelectedEvent] =useRecoilState(isSelectedEventState);
+  const [isSelectedEvent, setIsSelectedEvent] =
+    useRecoilState(isSelectedEventState);
 
   const { data: tableDetails } = useTableStanding();
   const maxPlayed = Math.max(...tableDetails.map((team) => team.intPlayed));
@@ -104,12 +106,16 @@ function NextMatches() {
                       : ""
                   } `}
                 >
-                  
+                  <Link
+                    to={`/EventDetails/${eventFileName.replace(/ /g, "_")}`}
+                  >
+                    
                   <img
                     className="aspect-square rounded-lg object-fill"
                     src={event.strSquare ? event.strSquare : event.strThumb}
                     alt=""
                   />
+                  </Link>
                   <div className="bottom-5 left-5 bot absolute">
                     <span className="text-black font-bold">
                       {event.dateEvent}
@@ -131,13 +137,14 @@ function NextMatches() {
             <>
               {" "}
               {nextEvents?.events &&
-  
                 nextEvents.events.some(
                   (event) =>
                     event.strStatus === null ||
                     event.strStatus === "Match Finished"
                 ) &&
                 nextEvents?.events.map((e) => (
+                  
+                  <Link to={`/EventDetails/${e.strFilename.replace(/ /g, "_")}`}>
                   <div
                     key={e.strFilename}
                     onClick={() => {
@@ -181,6 +188,7 @@ function NextMatches() {
                       <span>{e.intAwayScore}</span>
                     </div>
                   </div>
+                </Link>
                 ))}
             </>
           )}
