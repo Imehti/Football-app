@@ -15,9 +15,13 @@ interface Event{
     strAwayTeam:string;
     strHomeTeam:string;
     strDescriptionEN:string;
-    strFanart:string;
+    strFanart?:string;
     strFilename:string;
-    strMap:string;
+    strMap?:string;
+    strBanner?:string;
+    strPoster?:string;
+    strThumb?:string;
+    strVideo?:string
 
 }
 
