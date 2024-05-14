@@ -1,22 +1,18 @@
-
 import useEventDetails from "../hooks/useEventDetails";
 import Loading from "./Loading";
 import { useParams } from "react-router-dom";
 
-
-
 function EventDetails() {
-const params= useParams()
-  const {
-    data: eventDetails,
-    isLoading,
-  } = useEventDetails(params.eventName);
+  const params = useParams();
+  const { data: eventDetails, isLoading } = useEventDetails(params.eventName);
   console.log();
-  
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
-      {isLoading && <Loading />}
       {eventDetails && (
         <>
           <h1>{eventDetails.event.map((match) => match.strFilename)}</h1>
