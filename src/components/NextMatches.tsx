@@ -107,16 +107,7 @@ function NextMatches() {
                     alt=""
                   />
                   </Link>
-                  <div className="bottom-5 left-5 bot absolute">
-                    <span className="text-black font-bold">
-                      {event.dateEvent}
-                    </span>
-                  </div>
-                  <div className="bottom-5 right-5 bot absolute">
-                    <span className="text-black font-bold">
-                      {event.strTime}
-                    </span>
-                  </div>
+             
                 </div>
               </>
             ))}
