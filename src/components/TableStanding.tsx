@@ -35,6 +35,8 @@ const useTableStanding = () => {
   const secondLeagueOfCountry= league?.table[0].strLeague.includes("2") ||
   league?.table[0].strLeague.includes("B") || league?.table[0].strLeague=='English League Championship'
 
+
+
   const columns: TableProps["columns"] = [
     {
       title: "Team",
@@ -180,7 +182,25 @@ const useTableStanding = () => {
       }))) ||
     [];
 
-  return { columns, data, leagueName, isLoading , isError , error };
+    // const responsiveProps = {
+    //   bordered: true,
+    //   size: "small",
+    //   pagination: false,
+    //   scroll: { x: 1500 },
+    //   columns: columns,
+    //   dataSource: data,
+    //   responsive: {
+    //     columnWidth: 150,
+    //     minColumnWidth: 100,
+    //     maxColumnWidth: 200,
+    //     onBreakpointChange: (breakpoint:number, columnWidths:number) => {
+    //       console.log("Breakpoint changed:", breakpoint);
+    //       console.log("Column widths:", columnWidths);
+    //     },
+    //   },
+    // };
+
+  return { columns, data, leagueName, isLoading , isError , error  };
 };
 
 export default useTableStanding;
