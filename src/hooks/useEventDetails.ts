@@ -12,16 +12,14 @@ interface Event{
     intHomeScore:string;
     intRound:string;
     intSpectators:string;
-    strAwayTeam:string;
-    strHomeTeam:string;
     strDescriptionEN:string;
-    strFanart?:string;
     strFilename:string;
-    strMap?:string;
-    strBanner?:string;
-    strPoster?:string;
     strThumb?:string;
-    strVideo?:string
+    strVideo?:string;
+    strEvent:string;
+   strSeason:string;
+    strTime:string;
+    strVenue:string
 
 }
 
