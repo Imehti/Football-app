@@ -19,7 +19,8 @@ interface Event{
     strEvent:string;
    strSeason:string;
     strTime:string;
-    strVenue:string
+    strVenue:string;
+    strStatus:string
 
 }
 
