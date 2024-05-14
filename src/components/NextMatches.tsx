@@ -87,11 +87,8 @@ function NextMatches() {
             nextEvents?.events.map((event) => (
               <>
                 <div
-                  onClick={() => {
-                    // setIsSelectedEvent(true);
-                 
-                  }}
-                  className={`relative ${
+               
+                  className={`transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-600 hover:bg-cyan-500 ${
                     event.strLeague !== "English Premier League"
                       ? "border border-gray-400 rounded-lg"
                       : ""
