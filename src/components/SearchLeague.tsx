@@ -11,6 +11,8 @@ const SearchLeague: React.FC = () => {
   const { data: allLeagues } = useAllLeagues();
   const [value, setValue] = useRecoilState(SearchLeagueState);
   const [isSelected,setIsSelected]=useRecoilState(isSelectedLeagueaState)
+  console.log(isSelected);
+  
 
  
 

@@ -13,6 +13,8 @@ export interface Round {
 function FilterRound() {
   const [value, setValue] = useState<number | string>();
   const [options, setOptions] = useRecoilState<Round[]>(FilterRoundState);
+  console.log(options);
+  
   const startYear = 0;
   const endYear = 37;
   

@@ -13,6 +13,8 @@ const FilterYear: React.FC = () => {
   const [value, setValue] = useState<number | string>();
   const [options, setOptions] = useRecoilState<YearType[]>(FilterYearState);
   const [isSelected,setIsSelected]=useRecoilState(isSelectedYearState)
+  console.log(options,isSelected);
+  
   
   const startYear = 2010;
   const endYear = 2023;
