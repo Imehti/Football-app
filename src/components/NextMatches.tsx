@@ -139,7 +139,7 @@ function NextMatches() {
                   <div
                     key={e.strFilename}
                     onClick={() => {
-                      // setIsSelectedEvent(true);
+                  
                
                     }}
                     className={`border-1 shadow-lg shadow-slate-300 flex flex-row justify-between items-center rounded-xl p-2 transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:bg-cyan-500`}
