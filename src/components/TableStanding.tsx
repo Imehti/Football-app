@@ -11,6 +11,7 @@ const useTableStanding = () => {
   const yearValue = useRecoilValue(FilterdYearValue);
   const selectedLeagueStatus = useRecoilValue(isSelectedLeagueaValue);
   const selectedYearStatus = useRecoilValue(isSelectedYearValue);
+  console.log(searchedValue);
 
   const {
     data: league,
@@ -28,9 +29,11 @@ const useTableStanding = () => {
     refetch();
   }
 
-  const leagueName = league?.table[0] && league?.table[0]!==undefined ? league?.table[0].strLeague : '';
+  const leagueName = Array.isArray(league?.table) && league.table.length > 0 
+  ? league.table[0].strLeague 
+  : '';
 
-  const leagueSize: any = league?.table.length;
+  const leagueSize: number = league?.table?.length || 0;
 
   const secondLeagueOfCountry= league?.table[0].strLeague.includes("2") ||
   league?.table[0].strLeague.includes("B") || league?.table[0].strLeague=='English League Championship'

@@ -78,34 +78,30 @@ function NextMatches() {
       <>
         {" "}
         <div className="grid sm:grid-cols-5 grid-cols-2 gap-8 m-4">
-          {nextEvents?.events &&
-            nextEvents.events.some(
-              (event) =>
-                event.strStatus !== null && event.strStatus !== "Match Finished"
-            ) &&
-            nextEvents?.events.map((event) => (
-              <>
-                <div
-               
-                  className={`transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-600 hover:bg-cyan-500 ${
-                    event.strLeague !== "English Premier League"
-                      ? "border border-gray-400 rounded-lg"
-                      : ""
-                  } `}
+          {Array.isArray(nextEvents?.events) &&
+           Array.isArray(nextEvents?.events) &&
+           nextEvents.events.some(
+             (event) => event.strStatus !== null && event.strStatus !== "Match Finished"
+           )
+            &&
+            nextEvents.events.map((event) => (
+              <div
+                className={`transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-600 hover:bg-cyan-500 ${
+                  event.strLeague !== "English Premier League"
+                    ? "border border-gray-400 rounded-lg"
+                    : []
+                } `}
+              >
+                <Link
+                  to={`/EventDetails/${event.strFilename.replace(/ /g, "_")}`}
                 >
-                  <Link
-                    to={`/EventDetails/${event.strFilename.replace(/ /g, "_")}`}
-                  >
-                    
                   <img
                     className="aspect-square rounded-lg object-fill"
                     src={event.strSquare ? event.strSquare : event.strThumb}
                     alt=""
                   />
-                  </Link>
-             
-                </div>
-              </>
+                </Link>
+              </div>
             ))}
         </div>
         <div className="grid sm:grid-cols-4 grid-cols-2 gap-12 m-2">
@@ -121,45 +117,43 @@ function NextMatches() {
                     event.strStatus === "Match Finished"
                 ) &&
                 nextEvents?.events.map((e) => (
-                  
-                  <Link to={`/EventDetails/${e.strFilename.replace(/ /g, "_")}`}>
-                  <div
-                    key={e.strFilename}
-                    onClick={() => {
-                  
-               
-                    }}
-                    className={`border-1 shadow-lg shadow-slate-300 flex flex-row justify-between items-center rounded-xl p-2 transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:bg-cyan-500`}
+                  <Link
+                    to={`/EventDetails/${e.strFilename.replace(/ /g, "_")}`}
                   >
-                    <div className="flex flex-col items-center">
-                      <img
-                        className="w-8 h-8"
-                        src={
-                          tableDetails.find(
-                            (team) => team.strTeam === e.strHomeTeam
-                          )?.strTeamBadge
-                        }
-                        alt={e.strHomeTeam}
-                      />
-                      <span className="">{e.strHomeTeam}</span>
-                      <span>{e.intHomeScore}</span>
+                    <div
+                      key={e.strFilename}
+                      onClick={() => {}}
+                      className={`border-1 shadow-lg shadow-slate-300 flex flex-row justify-between items-center rounded-xl p-2 transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:bg-cyan-500`}
+                    >
+                      <div className="flex flex-col items-center">
+                        <img
+                          className="w-8 h-8"
+                          src={
+                            tableDetails.find(
+                              (team) => team.strTeam === e.strHomeTeam
+                            )?.strTeamBadge
+                          }
+                          alt={e.strHomeTeam}
+                        />
+                        <span className="">{e.strHomeTeam}</span>
+                        <span>{e.intHomeScore}</span>
+                      </div>
+                      <div className="border border-gray-300 h-1/2"></div>
+                      <div className="flex flex-col items-center">
+                        <img
+                          className="w-8 h-8"
+                          src={
+                            tableDetails.find(
+                              (team) => team.strTeam === e.strAwayTeam
+                            )?.strTeamBadge
+                          }
+                          alt={e.strAwayTeam}
+                        />
+                        <span className="">{e.strAwayTeam}</span>
+                        <span>{e.intAwayScore}</span>
+                      </div>
                     </div>
-                    <div className="border border-gray-300 h-1/2"></div>
-                    <div className="flex flex-col items-center">
-                      <img
-                        className="w-8 h-8"
-                        src={
-                          tableDetails.find(
-                            (team) => team.strTeam === e.strAwayTeam
-                          )?.strTeamBadge
-                        }
-                        alt={e.strAwayTeam}
-                      />
-                      <span className="">{e.strAwayTeam}</span>
-                      <span>{e.intAwayScore}</span>
-                    </div>
-                  </div>
-                </Link>
+                  </Link>
                 ))}
             </>
           )}
