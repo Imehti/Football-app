@@ -17,7 +17,7 @@ const FilterYear: React.FC = () => {
   
   
   const startYear = 2010;
-  const endYear = 2023;
+  const endYear = 2024;
 
   const yearOptions: YearType[] = [];
   for (let year = startYear; year <= endYear; year++) {
