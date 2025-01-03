@@ -176,7 +176,7 @@ const useTableStanding = () => {
         intGoalsAgainst: team.intGoalsAgainst,
         intGoalDifference: team.intGoalDifference,
         intPoints: team.intPoints,
-        strTeamBadge: team.strTeamBadge,
+        strTeamBadge: team.strBadge,
         intRank: team.intRank,
         strForm: team.strForm,
       }))) ||

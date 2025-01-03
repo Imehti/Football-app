@@ -47,7 +47,7 @@ const useNextMatches = (
               : maxPlayed !== 38
               ? maxPlayed + 1
               : maxPlayed
-          }&s=${season && season !== undefined ? season : "2023-2024"}`
+          }&s=${season && season !== undefined ? season : "2024-2025"}`
         )
         .then((res) => res.data),
     enabled: false,

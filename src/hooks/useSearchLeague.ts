@@ -19,7 +19,7 @@ export interface Table {
   intGoalDifference: number;
   intPoints: number;
   idTeam: string;
-  strTeamBadge: string;
+  strBadge: string;
 }
 
 export interface League {
@@ -40,7 +40,7 @@ const useSearchLeague = (idLeague: number, year: number | string) => {
         .get<League>(
           `/lookuptable.php?l=${
             idLeague && idLeague !== undefined ? idLeague : 4328
-          }&s=${ year && year !== undefined ? year : "2023-2024"}`
+          }&s=${ year && year !== undefined ? year : "2024-2025"}`
         )
         .then((res) => res.data),
   });
